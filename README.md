@@ -78,5 +78,7 @@ git push origin feature/your-feature-name
 5. Create a pull request from your forked repository to the main project repository.
 Please make sure to follow the project's code of conduct and contribute in a respectful and constructive manner.
 
+## licence
+This project is licensed under the MIT License - do what the fuck you want. just give me credit.
 
 
