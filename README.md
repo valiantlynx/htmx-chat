@@ -12,7 +12,7 @@ thesre is the current one:
 ## Table of Contents
 
 - [Features](#features)
-- [Demo](#demo)
+- [Demo](https://valiantlynx.github.io/htmx-chat/)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
