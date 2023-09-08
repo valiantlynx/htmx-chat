@@ -28,7 +28,7 @@ thesre is the current one:
 
 ## Demo
 
-You can try out a live demo of the chat app [here](#).
+You can try out a live demo of the chat app [here](https://valiantlynx.github.io/htmx-chat/).
 
 ## Installation
 
