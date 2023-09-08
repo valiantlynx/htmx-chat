@@ -35,7 +35,7 @@ You can try out a live demo of the chat app [here](https://valiantlynx.github.io
 1. Clone this repository to your local machine:
 
 ```bash
-git clone [https://github.com/your-username/chat-app.git](https://github.com/valiantlynx/htmx-chat.git)
+git clone https://github.com/valiantlynx/htmx-chat.git
 ```
 2. Navigate to the project directory:
 ```bash
