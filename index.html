@@ -3,17 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PocketBase x htmx Chat</title>
+        <title>python chatbot x htmx Chat</title>
         <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css">
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <div class="min-h-screen flex flex-col justify-center items-center">
             <h1 class="text-3xl font-bold mb-8">Chat App</h1>
-               
             <div class="bg-base-300 rounded-lg p-4 shadow-md w-96">
                 <div id="chat-container" class="mb-4">
-                    <!-- Chat messages will be displayed here --></div>
+                    <!-- Chat messages will be displayed here -->
+                    <div hx-get="/get_messages" hx-trigger="load" hx-target="#chat-container">
+                    </div>
+                </div>
                 <div class="flex">
                     <input
                         type="text"
@@ -21,11 +23,18 @@
                         placeholder="Type your message"
                         class="flex-grow input px-2 py-1 border rounded-l-lg"
                     >
-                    <button id="send-button" class="px-4 py-2 btn-secondary rounded-r-lg">Send</button>
+                    <button
+                        id="send-button"
+                        hx-get="http://localhost:8000/chat/34?q=who%20created%20you"
+                        hx-vars="q:document.getElementById('message-input').value"
+                        hx-trigger="click"
+                        hx-target="#chat-container"
+                        hx-swap="beforeend"
+                        class="px-4 py-2 btn-secondary rounded-r-lg"
+                    >Send</button>
                 </div>
             </div>
         </div>
         <script src="https://unpkg.com/htmx.org@1.6.0/dist/htmx.min.js"></script>
-        <script src="chat.js"></script>
     </body>
 </html>
