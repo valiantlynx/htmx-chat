@@ -1,9 +1,8 @@
-# PocketBase x htmx Chat App
+# PocketBase? x htmx AI Chat App
 
-A simple chat application built with HTMx, JavaScript, and the PocketBase API, styled using Tailwind CSS.
-I was initially just testing to see if i could make a simple chat app using only htmx to sned requests directly to and from pocketbase. this would mean my whole project would be one html file and the pocketbase admin ui. i worked on it for 30 min. 
-the problem i pocketbase send json back but htmx expects html.
-i removed the htmx code and just did it in js. 
+A simple chat application built with HTMx, JavaScript, and the PocketBase API, styled using Tailwind CSS. there is a python AI chatbot listening as well.
+I was initially just testing to see if i could make a simple chat app using only htmx to send requests directly to and from pocketbase. this would mean my whole project would be one html file and the pocketbase admin ui. i worked on it for 30 min. 
+the problem i pocketbase send json back but htmx expects html. though i was able to get the ai to send back html
 if someone is intrested in the same thing as me here. get in contact with me here. i'll gladly work with you. 
 thesre is the current one:
 ![image](https://github.com/valiantlynx/htmx-chat/assets/86688436/d3c45b12-87b3-43df-879b-92b8bd33fc9d)
@@ -51,7 +50,6 @@ cd chat-app
 
 3. Received messages will be displayed in the chat container.
 
-4. Messages are stored and retrieved using the PocketBase API. You can replace the API endpoints in the chat.js file with your own endpoints.
 
 ## Contributing
 
