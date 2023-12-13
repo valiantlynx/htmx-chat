@@ -29,6 +29,11 @@ thesre is the current one:
 
 You can try out a live demo of the chat app [here](https://valiantlynx.github.io/htmx-chat/).
 
+## Progress
+
+i've been able to show the images returned from pocketbase(as json) into the chat and looks good.
+im still looking for a way to post chats fully htmx as well.
+
 ## Installation
 
 1. Clone this repository to your local machine:
@@ -80,3 +85,9 @@ Please make sure to follow the project's code of conduct and contribute in a res
 This project is licensed under the MIT License - do what the fuck you want. just give me credit.
 
 
+## for cloning into monorepo
+```bash
+git subtree add --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat.git main --squash
+git subtree pull --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat.git main --squash
+git subtree push --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat.git main
+```

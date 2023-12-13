@@ -3,38 +3,86 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>python chatbot x htmx Chat</title>
+        <title>Pocketbase X htmx Chat</title>
         <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/htmx.org"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
     </head>
     <body>
         <div class="min-h-screen flex flex-col justify-center items-center">
-            <h1 class="text-3xl font-bold mb-8">Chat App</h1>
-            <div class="bg-base-300 rounded-lg p-4 shadow-md w-96">
-                <div id="chat-container" class="mb-4">
-                    <!-- Chat messages will be displayed here -->
-                    <div hx-get="/get_messages" hx-trigger="load" hx-target="#chat-container">
+            <h1 class="text-3xl font-bold mb-8">Pocketbase X htmx Chat</h1>
+            <h3 class="text-xl font-bold mb-4">Powered by htmx and Pocketbase.</h3>
+            <p class="text-lg mb-1">This is a simple chat app that uses htmx to send and receive messages. This one html file is all there is to it.</p>
+            <p class="text-lg mb-1">The chat messages are sent and received using htmx and stored in a Pocketbase collection. The chat messages are rendered using Nunjucks templates.</p>
+            <p class="text-lg mb-1 text-warning">There is a currently a bug. The css for the chat templates are not rendered on the first load after you send a message. You have to refresh the page to apply the css to the chat messages.</p>
+            <div class="bg-base-300 rounded-lg p-4 shadow-md w-full sm:w-2/3 " hx-ext="client-side-templates">
+                <form
+                    id="chat-form"
+                    hx-post="https://animevariant.fly.dev/api/collections/chat_htmx/records"
+                    hx-target="#chat-container"
+                    hx-swap="outerHTML"
+                    hx-encoding="multipart/form-data"
+                >
+                    <div class="flex flex-wrap">
+                        <input
+                            type="text"
+                            name="message"
+                            id="message-input"
+                            placeholder="Type your message"
+                            class="flex-grow input px-2 py-1 border rounded-l-lg"
+                        >
+                        <!-- Additional hidden fields if necessary -->
+                        <button type="submit" class="px-4 py-2 btn-secondary rounded-r-lg">Send</button>
                     </div>
-                </div>
-                <div class="flex">
-                    <input
-                        type="text"
-                        id="message-input"
-                        placeholder="Type your message"
-                        class="flex-grow input px-2 py-1 border rounded-l-lg"
-                    >
+                </form>
+                <div
+                    id="chat-container"
+                    hx-get="https://animevariant.fly.dev/api/collections/chat_htmx/records?page=1&perPage=30&sort=-created"
+                    hx-trigger="load, every 5s"
+                    class="mb-4"
+                    nunjucks-template="chat"
+                ></div>
+                <!-- these are the templates by htmx. they take json data and render it as html -->
+                <template id="chat">
+                    <!-- totalItems -->
+                    {% if page == 1 %}
+                    <i> Found {{ totalItems }} articles.</i>
+                    {% endif %}
+                    <!-- items -->
+                    {% for chat in items %}
+                    <a href="https://www.valiantlynx.com/" target="_blank">
+                        <div class="chat chat-start">
+                            <div class="chat-image avatar">
+                                <div class="w-10 rounded-full">
+                                    <img alt="Tailwind CSS chat bubble component" src="https://api.dicebear.com/7.x/adventurer/svg?seed={{ chat.message }}">
+                                </div>
+                            </div>
+                            <div class="chat-header">
+                                Someone
+                                <time class="text-xs opacity-50">{{ chat.created | truncate(10, true, "")}}</time>
+                            </div>
+                            <div class="chat-bubble">{{ chat.message }}</div>
+                            <div class="chat-footer opacity-50">
+                                Delivered
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    <!-- load more -->
+                    {% if next %}
                     <button
-                        id="send-button"
-                        hx-get="https://valiantchat.onrender.com/chat/34"
-                        hx-vars="q:document.getElementById('message-input').value"
+                        hx-get="{{ next }}"
+                        hx-swap="outerHTML"
                         hx-trigger="click"
-                        hx-target="#chat-container"
-                        hx-swap="beforeend"
-                        class="px-4 py-2 btn-secondary rounded-r-lg"
-                    >Send</button>
-                </div>
+                        nunjucks-template="blogs-template"
+                    >
+                        Load More...
+                    </button>
+                    {% endif %}
+                </template>
             </div>
         </div>
-        <script src="https://unpkg.com/htmx.org@1.6.0/dist/htmx.min.js"></script>
     </body>
 </html>
