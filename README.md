@@ -5,11 +5,17 @@ I was initially just testing to see if i could make a simple chat app using only
 the problem i pocketbase send json back but htmx expects html. though i was able to get the ai to send back html
 if someone is intrested in the same thing as me here. get in contact with me here. i'll gladly work with you. 
 thesre is the current one:
-![image](https://github.com/valiantlynx/htmx-chat/assets/86688436/d3c45b12-87b3-43df-879b-92b8bd33fc9d)
+## images 
+ - latest version:
+ - ![Screenshot 2023-12-13 093218](https://github.com/valiantlynx/htmx-chat/assets/86688436/ba79b3b4-8608-4292-81e3-f976ea814579)
+ 
+ - version 1
+ - ![image](https://github.com/valiantlynx/htmx-chat/assets/86688436/d3c45b12-87b3-43df-879b-92b8bd33fc9d)
 
 edit: i was able to get the json to display as html. but i still need to figure out how to send json to pocketbase. i've removed the ai for now. i'll add it back later. now this whole project is just one html file and the pocketbase admin ui. Anyone can send pull requests. i'll merge them as long as they are good.
 
 ## Table of Contents
+
 
 - [Features](#features)
 - [Demo](https://valiantlynx.github.io/htmx-chat/)
