@@ -17,7 +17,8 @@ edit: i was able to get the json to display as html. but i still need to figure 
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-
+- [Progress](#progress)
+  
 ## Features
 
 - Send and receive chat messages.
@@ -32,8 +33,8 @@ You can try out a live demo of the chat app [here](https://valiantlynx.github.io
 
 ## Progress
 
-i've been able to show the images returned from pocketbase(as json) into the chat and looks good.
-im still looking for a way to post chats fully htmx as well.
+i've been able to show the messages returned from pocketbase(as json) into the chat and looks good.
+i will return the ai to listen to the chats and answer. 
 
 ## Installation
 
@@ -82,7 +83,7 @@ git push origin feature/your-feature-name
 5. Create a pull request from your forked repository to the main project repository.
 Please make sure to follow the project's code of conduct and contribute in a respectful and constructive manner.
 
-## licence
+## License
 This project is licensed under the MIT License - do what the fuck you want. just give me credit.
 
 
