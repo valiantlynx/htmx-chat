@@ -1,4 +1,4 @@
-# PocketBase? x htmx x python AI Chat App
+# PocketBase x htmx x python(comming back soon) AI Chat App
 
 A simple chat application built with HTMx, JavaScript, and the PocketBase API, styled using Tailwind CSS. there is a python AI chatbot listening as well.
 I was initially just testing to see if i could make a simple chat app using only htmx to send requests directly to and from pocketbase. this would mean my whole project would be one html file and the pocketbase admin ui. i worked on it for 30 min. 
