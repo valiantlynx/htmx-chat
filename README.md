@@ -19,13 +19,18 @@ here is the current one:
 ## Table of Contents
 
 
-- [Features](#features)
-- [Demo](https://valiantlynx.github.io/htmx-chat/)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Progress](#progress)
+- [PocketBase x htmx x python(comming back soon) AI Chat App](#pocketbase-x-htmx-x-pythoncomming-back-soon-ai-chat-app)
+  - [images](#images)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Demo](#demo)
+  - [Progress](#progress)
+  - [Installation](#installation)
+  - [usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [for cloning into monorepo](#for-cloning-into-monorepo)
+    - [cors work around in the head](#cors-work-around-in-the-head)
   
 ## Features
 
@@ -101,3 +106,13 @@ git subtree add --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat
 git subtree pull --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat.git main --squash
 git subtree push --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-chat.git main
 ```
+
+### cors work around in the head
+´´´js
+    <script>
+            // CORS workaround
+            document.addEventListener("htmx:configRequest", (evt) => {
+                evt.detail.headers = [];
+            });
+        </script>
+        ´´´
