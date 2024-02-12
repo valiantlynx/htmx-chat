@@ -110,9 +110,9 @@ git subtree push --prefix=apps/htmx-chat https://github.com/valiantlynx/htmx-cha
 ### cors work around in the head
 ´´´js
     <script>
-            // CORS workaround
-            document.addEventListener("htmx:configRequest", (evt) => {
-                evt.detail.headers = [];
-            });
-        </script>
-        ´´´
+      // CORS workaround
+      document.addEventListener("htmx:configRequest", (evt) => {
+            evt.detail.headers = [];
+      });
+   </script>
+´´´
