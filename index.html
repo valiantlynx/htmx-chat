@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
-    <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script> <!-- SSE Extension -->
+    <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
+    <!-- Include SSE extension for real-time updates -->
+    <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
 </head>
-
 <body>
     <div class="min-h-screen flex flex-col justify-center items-center">
-        <!-- New Section for Icons -->
-        <div class="flex justify-center gap-10 my-8">
+          <!-- New Section for Icons -->
+          <div class="flex justify-center gap-10 my-8">
             <a href="https://github.com/valiantlynx/htmx-chat" target="_blank" class="text-6xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
                     <g fill-rule="evenodd" clip-rule="evenodd">
@@ -42,62 +42,48 @@
         <p class="text-lg mb-1">The chat messages are sent and received using htmx and stored in a Pocketbase
             collection. The chat messages are rendered using Nunjucks templates.</p>
 
-        <!-- Important code starts here -->
-        <div class="bg-base-300 rounded-lg p-4 shadow-md w-full sm:w-2/3 " hx-ext="client-side-templates">
-            <form id="chat-form" hx-sse="https://animevariant.fly.dev/api/collections/chat_htmx/records"
-                hx-target="#chat-container" hx-encoding="multipart/form-data">
+
+        <!-- Chat Form -->
+        <div class="bg-base-300 rounded-lg p-4 shadow-md w-full sm:w-2/3" hx-ext="client-side-templates">
+            <form id="chat-form" hx-post="https://animevariant.fly.dev/api/collections/chat_htmx/records" hx-target="#chat-container" hx-encoding="multipart/form-data">
                 <div class="flex flex-wrap">
-                    <input type="text" name="message" id="message-input" placeholder="Type your message"
-                        class="flex-grow input px-2 py-1 border rounded-l-lg" minlength="2">
-                    <!-- Additional hidden fields if necessary -->
-                    <button type="submit" class="px-4 py-2 btn  rounded-r-lg border border-secondary">Send</button>
+                    <input type="text" name="message" id="message-input" placeholder="Type your message" class="flex-grow input px-2 py-1 border rounded-l-lg" minlength="2">
+                    <button type="submit" class="px-4 py-2 btn rounded-r-lg border border-secondary">Send</button>
                 </div>
             </form>
-            <!-- Infinite Scroll implementation for chat container -->
-            <div id="chat-container"
-                hx-get="https://animevariant.fly.dev/api/collections/chat_htmx/records?page=1&perPage=3&sort=-created"
-                hx-trigger="load" class="mb-4" nunjucks-template="chat"></div>
-            <!-- Updated template section -->
-            <template id="chat">
-                {% if page == 1 %}
-                <i> Found {{ totalItems }} articles.</i>
-                
-                {% endif %}
 
-                {% for chat in items %}
-                <div class="chat chat-start">
-                    <div class="chat-image avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS chat bubble component"
-                                src="https://api.dicebear.com/7.x/adventurer/svg?seed={{ chat.message }}">
-                        </div>
-                    </div>
-                    <div class="chat-header">
-                        Someone
-                        <time class="text-xs opacity-50">{{ chat.created | truncate(10, true, "")}}</time>
-                    </div>
-                    <div class="chat-bubble">{{ chat.message }}</div>
-                    <div class="chat-footer opacity-50">
-                        Delivered
+            <!-- Chat Container with Real-Time Updates -->
+            <div id="chat-container" class="mb-4" hx-get="https://animevariant.fly.dev/api/collections/chat_htmx/records?page=1&perPage=1&sort=-created" hx-trigger="load" nunjucks-template="chat"></div>
+        </div>
+
+        <!-- Nunjucks Template for Chat Messages -->
+        <template id="chat">
+            {% if page == 1 %}
+            <i>Found {{ totalItems }} chats.</i>
+            {% endif %}
+            {% for chat in items %}
+            <div class="chat chat-start">
+                <div class="chat-image avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Tailwind CSS chat bubble component" src="https://api.dicebear.com/7.x/adventurer/svg?seed={{ chat.message }}">
                     </div>
                 </div>
-                {% endfor %}
-                
-                {% if page %}
-                <button
-                    hx-get="https://animevariant.fly.dev/api/collections/chat_htmx/records?page={{ page + 1 }}&perPage=3&sort=-created"
-                    hx-swap="outerHTML"
-                    hx-trigger="revealed"
-                    class="invisible"
-                    nunjucks-template="chat"
-                >
-                    Load More...
-                </button>
-                {% endif %}
-            </template>
-
-        </div>
+                <div class="chat-header">
+                    Someone
+                    <time class="text-xs opacity-50">{{ chat.created | truncate(10, true, "") }}</time>
+                </div>
+                <div class="chat-bubble">{{ chat.message }}</div>
+                <div class="chat-footer opacity-50">
+                    Delivered
+                </div>
+            </div>
+            {% endfor %}
+            {% if page %}
+            <button hx-get="https://animevariant.fly.dev/api/collections/chat_htmx/records?page={{ page + 1 }}&perPage=3&sort=-created" hx-swap="outerHTML" hx-trigger="revealed" class="invisible" nunjucks-template="chat">
+                Load More...
+            </button>
+            {% endif %}
+        </template>
     </div>
 </body>
-
 </html>
