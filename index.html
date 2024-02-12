@@ -9,12 +9,6 @@
         <script src="https://unpkg.com/htmx.org"></script>
         <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
-        <script>
-            // CORS workaround
-            document.addEventListener("htmx:configRequest", (evt) => {
-                evt.detail.headers = [];
-            });
-        </script>
     </head>
     <body>
         <div class="min-h-screen flex flex-col justify-center items-center">
